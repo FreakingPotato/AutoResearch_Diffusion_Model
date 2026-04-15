@@ -611,41 +611,35 @@ def fetch_seq_ucsc(chrom, start, end):
 
 
 def load_gb_dataset(benchmark_name, sample_frac=0.05, max_seqs=400):
-    """Load GB dataset: returns list of (sequence_string, label_int)."""
-    try:
-        from datasets import load_dataset
-        ds = load_dataset("katielink/genomic-benchmarks", benchmark_name)
-    except Exception as e:
-        print(f"    HF load failed for {benchmark_name}: {e}")
-        return []
+    """Load GB dataset from local genomic-benchmarks cache.
+    Returns list of (sequence_string, label_int) using official train/test split."""
+    base = Path.home() / '.genomic_benchmarks' / benchmark_name
 
-    results = []
-    for split_name in ["train", "test"]:
-        if split_name not in ds:
-            continue
-        sp = ds[split_name]
-        n = min(max(1, int(len(sp) * sample_frac)), max_seqs // 2)
-        np.random.seed(42)
-        indices = np.random.choice(len(sp), min(n, len(sp)), replace=False)
+    # Try local cache first (has sequences + labels in folder structure)
+    if base.exists():
+        results = []
+        for split_name in ['train', 'test']:
+            split_path = base / split_name
+            if not split_path.exists():
+                continue
+            class_dirs = sorted([d for d in split_path.iterdir() if d.is_dir()])
+            if len(class_dirs) < 2:
+                continue
 
-        for idx in indices:
-            row = sp[int(idx)]
-            seq = row.get("sequence", "")
-            label = row.get("label", 0)
+            for label_idx, class_dir in enumerate(class_dirs):
+                files = sorted(class_dir.glob('*.txt'))
+                n = min(max(1, int(len(files) * sample_frac)), max_seqs // (2 * len(class_dirs)))
+                np.random.seed(42)
+                chosen = np.random.choice(len(files), min(n, len(files)), replace=False)
+                for fi in chosen:
+                    seq = files[fi].read_text().strip()
+                    if len(seq) >= 10:
+                        results.append((seq, label_idx))
+        return results
 
-            if not seq:
-                region = row.get("region", "")
-                start = row.get("start", 0)
-                end = row.get("end", 0)
-                if region and end > start:
-                    chrom = region if region.startswith("chr") else f"chr{region}"
-                    seq = fetch_seq_ucsc(chrom, start, end)
-                    time.sleep(0.05)
-
-            if seq and len(seq) >= 10:
-                results.append((seq, int(label)))
-
-    return results
+    # Fallback: HF datasets (slow, no proper labels)
+    print(f"    Local cache not found for {benchmark_name}, skipping")
+    return []
 
 
 def tokenize_sequences(seqs, nt_to_id, unk_id, pad_id, seq_len):
@@ -847,7 +841,7 @@ def make_optimizer(name, params, lr, wd):
         return torch.optim.AdamW(params, lr=lr, weight_decay=wd, betas=(0.9, 0.95))
     elif name == "muon":
         from muon import Muon
-        return Muon(params, lr=lr, momentum=0.95, nesterov=True)
+        return Muon(params, lr=lr, momentum=0.95)
     return torch.optim.AdamW(params, lr=lr, weight_decay=wd, betas=(0.9, 0.95))
 
 
