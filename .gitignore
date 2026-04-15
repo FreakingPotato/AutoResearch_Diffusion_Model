@@ -1,0 +1,10 @@
+checkpoints/
+__pycache__/
+*.pyc
+.venv/
+checkpoints_nucel/
+checkpoints_phase3/
+checkpoints/
+*.pt
+logs/
+.venv/

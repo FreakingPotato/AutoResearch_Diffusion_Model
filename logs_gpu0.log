@@ -1,0 +1,96 @@
+Using GPU 0
+Running experiments 0–5  (6 total)  on GPU 0
+
+======================================================================
+EXPERIMENT 0: nucel_frozen_probe
+======================================================================
+  optimizer: none
+  lr: 0
+  time_embed: additive
+  attention_type: standard
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.0
+  frozen_probe: True
+
+Running frozen NucEL linear probe (no training)...
+Loading NucEL vocab from FreakingPotato/NucEL ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  vocab_size=27, mask_id=4, unk_id=1
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1800.19it/s]
+    GB human_enhancers_cohn: acc=1.0000 (200 train, 200 test)
+    GB human_enhancers_ensembl: acc=1.0000 (200 train, 200 test)
+    GB human_ensembl_regulatory: acc=1.0000 (200 train, 200 test)
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 12355 examples [00:00, 181734.93 examples/s]
+    HF load failed for human_nontata_promoters: An error occurred while generating the dataset
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=1.0000 (200 train, 200 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=1.0000 (93 train, 93 test)
+    GB demo_human_or_worm: acc=1.0000 (122 train, 123 test)
+    GB dummy_mouse_enhancers_ensembl: acc=1.0000 (30 train, 30 test)
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 0 (nucel_frozen_probe) done
+
+
+======================================================================
+EXPERIMENT 1: diffusion_baseline
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: additive
+  attention_type: standard
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 33/134 [00:00<00:00, 305.43it/s]Loading weights:  54%|█████▎    | 72/134 [00:00<00:00, 348.14it/s]Loading weights:  88%|████████▊ | 118/134 [00:00<00:00, 395.85it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 388.82it/s]
+  Backbone transformer layers found: 22
+Total params:     100,203,520  (100.2M)
+Trainable params: 100,203,520  (100.2M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 1821ms/step, ~43.2min/epoch
+  Time budget: 61.2 min
+  step 00000 | loss=1.9037 | lr=0.00e+00 | dt=2513ms | rem=3673s
+  step 00050 | loss=1.3043 | lr=2.11e-04 | dt=1256ms | rem=3598s
+  step 00100 | loss=1.1907 | lr=3.00e-04 | dt=944ms | rem=3547s
+  step 00150 | loss=1.1281 | lr=2.97e-04 | dt=887ms | rem=3500s
+  step 00200 | loss=1.1637 | lr=2.93e-04 | dt=881ms | rem=3455s
+  step 00250 | loss=1.1327 | lr=2.87e-04 | dt=874ms | rem=3411s
+  step 00300 | loss=1.1154 | lr=2.79e-04 | dt=886ms | rem=3366s
+  step 00350 | loss=1.1526 | lr=2.70e-04 | dt=893ms | rem=3322s
+  step 00400 | loss=1.1046 | lr=2.58e-04 | dt=886ms | rem=3278s
+  step 00450 | loss=1.1020 | lr=2.46e-04 | dt=871ms | rem=3234s
+  step 00500 | loss=1.0965 | lr=2.32e-04 | dt=865ms | rem=3190s
+  step 00550 | loss=1.0468 | lr=2.17e-04 | dt=868ms | rem=3147s
+  step 00600 | loss=1.0892 | lr=2.01e-04 | dt=881ms | rem=3103s
+  step 00650 | loss=1.0748 | lr=1.84e-04 | dt=876ms | rem=3059s
+  step 00700 | loss=1.0164 | lr=1.67e-04 | dt=873ms | rem=3015s
+  step 00750 | loss=1.0195 | lr=1.49e-04 | dt=896ms | rem=2972s
+  step 00800 | loss=1.0406 | lr=1.32e-04 | dt=871ms | rem=2928s
+  step 00850 | loss=1.0812 | lr=1.15e-04 | dt=878ms | rem=2884s
+  step 00900 | loss=1.0161 | lr=9.82e-05 | dt=877ms | rem=2840s
+  step 00950 | loss=1.0804 | lr=8.22e-05 | dt=877ms | rem=2796s
+  step 01000 | loss=1.1246 | lr=6.72e-05 | dt=877ms | rem=2752s
+  step 01050 | loss=1.0948 | lr=5.33e-05 | dt=873ms | rem=2708s
+  step 01100 | loss=1.0545 | lr=4.07e-05 | dt=876ms | rem=2665s
+  step 01150 | loss=1.0866 | lr=2.95e-05 | dt=877ms | rem=2621s
+  step 01200 | loss=1.0677 | lr=2.00e-05 | dt=877ms | rem=2577s
+  step 01250 | loss=1.0843 | lr=1.22e-05 | dt=869ms | rem=2533s
+  step 01300 | loss=1.0217 | lr=6.26e-06 | dt=875ms | rem=2490s
+  step 01350 | loss=1.0515 | lr=2.27e-06 | dt=875ms | rem=2446s
+  step 01400 | loss=1.0515 | lr=2.52e-07 | dt=873ms | rem=2402s
+  step 01450 | loss=1.0229 | lr=0.00e+00 | dt=876ms | rem=2358s
+  step 01500 | loss=1.1384 | lr=0.00e+00 | dt=880ms | rem=2314s
+  step 01550 | loss=1.0647 | lr=0.00e+00 | dt=866ms | rem=2271s
+  step 01600 | loss=1.0488 | lr=0.00e+00 | dt=1095ms | rem=2222s
+  step 01650 | loss=1.0742 | lr=0.00e+00 | dt=870ms | rem=2176s
+  step 01700 | loss=1.0575 | lr=0.00e+00 | dt=872ms | rem=2133s
+  step 01750 | loss=1.0465 | lr=0.00e+00 | dt=868ms | rem=2089s
+  step 01800 | loss=1.0370 | lr=0.00e+00 | dt=869ms | rem=2046s
