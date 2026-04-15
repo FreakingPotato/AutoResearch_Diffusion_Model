@@ -529,12 +529,13 @@ class NucELDiffusionV3(nn.Module):
 
     @torch.no_grad()
     def get_embeddings(self, input_ids, pool="mean"):
-        """Extract embeddings (mean pooling over sequence)."""
+        """Extract embeddings."""
         out = self.nucel(input_ids=input_ids)
         hidden = out.last_hidden_state if hasattr(out, "last_hidden_state") else out[0]
-        if pool == "mean":
-            return hidden.mean(dim=1)
-        return hidden[:, 0]  # CLS-like
+        if pool == "cls":
+            # Use first token as CLS representation
+            return hidden[:, 0]
+        return hidden.mean(dim=1)  # mean pooling
 
     @torch.no_grad()
     def sample(self, n, seq_len, device, steps=None):
@@ -610,7 +611,7 @@ def fetch_seq_ucsc(chrom, start, end):
         return ""
 
 
-def load_gb_dataset(benchmark_name, sample_frac=0.05, max_seqs=400):
+def load_gb_dataset(benchmark_name, sample_frac=0.20, max_seqs=2000):
     """Load GB dataset from local genomic-benchmarks cache.
     Returns list of (sequence_string, label_int) using official train/test split."""
     base = Path.home() / '.genomic_benchmarks' / benchmark_name
@@ -656,21 +657,21 @@ def tokenize_sequences(seqs, nt_to_id, unk_id, pad_id, seq_len):
 
 
 @torch.no_grad()
-def extract_embeddings(model, input_ids, device, batch_size=16):
-    """Extract mean-pooled embeddings in batches."""
+def extract_embeddings(model, input_ids, device, batch_size=16, pool="cls"):
+    """Extract embeddings in batches."""
     model.eval()
     all_embs = []
     for i in range(0, len(input_ids), batch_size):
         batch = input_ids[i:i+batch_size].to(device)
         with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-            embs = model.get_embeddings(batch, pool="mean")
+            embs = model.get_embeddings(batch, pool=pool)
         all_embs.append(embs.float().cpu())
     return torch.cat(all_embs, dim=0)
 
 
 @torch.no_grad()
 def extract_frozen_nucel_embeddings(input_ids, device, batch_size=16, backbone=None):
-    """Extract embeddings from frozen NucEL (no diffusion wrapper)."""
+    """Extract embeddings from frozen NucEL (no diffusion wrapper). Uses CLS token."""
     load_backbone = backbone is None
     if load_backbone:
         from transformers import AutoModel
@@ -685,7 +686,7 @@ def extract_frozen_nucel_embeddings(input_ids, device, batch_size=16, backbone=N
         with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
             out = backbone(input_ids=batch)
             hidden = out.last_hidden_state
-            embs = hidden.mean(dim=1)
+            embs = hidden[:, 0]  # CLS token
         all_embs.append(embs.float().cpu())
 
     if load_backbone:
@@ -780,8 +781,8 @@ def evaluate_gb_linear_probe(model, device, seq_len=DEFAULT_SEQ_LEN, frozen_nuce
                 test_embs  = extract_frozen_nucel_embeddings(test_ids, device, backbone=frozen_backbone)
             else:
                 model.eval()
-                train_embs = extract_embeddings(model, train_ids, device)
-                test_embs  = extract_embeddings(model, test_ids, device)
+                train_embs = extract_embeddings(model, train_ids, device, pool="cls")
+                test_embs  = extract_embeddings(model, test_ids, device, pool="cls")
 
             train_embs = train_embs.to(device)
             probe = train_linear_probe(train_embs, train_labels)
@@ -840,8 +841,21 @@ def make_optimizer(name, params, lr, wd):
     if name == "adamw":
         return torch.optim.AdamW(params, lr=lr, weight_decay=wd, betas=(0.9, 0.95))
     elif name == "muon":
-        from muon import Muon
-        return Muon(params, lr=lr, momentum=0.95)
+        from muon import SingleDeviceMuon
+        # Muon only works for 2D+ params; filter and use with aux Adam for 1D params
+        params_2d = [p for p in params if p.ndim >= 2]
+        params_1d = [p for p in params if p.ndim < 2]
+        if params_2d and params_1d:
+            from muon import SingleDeviceMuonWithAuxAdam
+            param_groups = [
+                dict(params=params_2d, lr=lr, momentum=0.95, weight_decay=wd, use_muon=True),
+                dict(params=params_1d, lr=lr*0.5, betas=(0.9, 0.95), eps=1e-10, weight_decay=wd, use_muon=False),
+            ]
+            return SingleDeviceMuonWithAuxAdam(param_groups)
+        elif params_2d:
+            return SingleDeviceMuon(params_2d, lr=lr, momentum=0.95, weight_decay=wd)
+        else:
+            return torch.optim.AdamW(params, lr=lr, weight_decay=wd, betas=(0.9, 0.95))
     return torch.optim.AdamW(params, lr=lr, weight_decay=wd, betas=(0.9, 0.95))
 
 
