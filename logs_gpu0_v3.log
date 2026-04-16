@@ -14,9 +14,8 @@ EXPERIMENT 2: muon
   batch_size: 8
   weight_decay: 0.01
 
-Loading NucEL backbone (FreakingPotato/NucEL) ...
-`torch_dtype` is deprecated! Use `dtype` instead!
-Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 66/134 [00:00<00:00, 627.18it/s]Loading weights:  96%|█████████▋| 129/134 [00:00<00:00, 594.74it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 596.68it/s]
+Loading NucEL backbone (FreakingPotato/NucEL) with flash_attention_2 ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1972.30it/s]
 Loading NucEL vocab from FreakingPotato/NucEL ...
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
   vocab_size=27, mask_id=4, unk_id=1
@@ -24,21 +23,378 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 Total params:     100,203,520  (100.2M)
 Trainable params: 100,203,520  (100.2M)
 batch=8, grad_accum=4, eff_tokens/step=32,768
-  Speed benchmark: 1062ms/step, ~25.2min/epoch
-  Time budget: 37.8 min
-  step 00000 | loss=1.7238 | lr=0.00e+00 | dt=904ms | rem=2268s
-  step 00050 | loss=1.2129 | lr=1.41e-02 | dt=907ms | rem=2225s
-  step 00100 | loss=1.1923 | lr=2.00e-02 | dt=920ms | rem=2179s
-  step 00150 | loss=1.2409 | lr=1.98e-02 | dt=922ms | rem=2133s
-  step 00200 | loss=1.1905 | lr=1.96e-02 | dt=921ms | rem=2087s
-  step 00250 | loss=1.2337 | lr=1.91e-02 | dt=920ms | rem=2041s
-  step 00300 | loss=1.1603 | lr=1.86e-02 | dt=921ms | rem=1995s
-  step 00350 | loss=1.1569 | lr=1.80e-02 | dt=921ms | rem=1949s
-  step 00400 | loss=1.1964 | lr=1.72e-02 | dt=924ms | rem=1903s
-  step 00450 | loss=1.1142 | lr=1.64e-02 | dt=922ms | rem=1856s
-  step 00500 | loss=1.1433 | lr=1.54e-02 | dt=922ms | rem=1810s
-  step 00550 | loss=1.0853 | lr=1.44e-02 | dt=924ms | rem=1764s
-  step 00600 | loss=1.1000 | lr=1.34e-02 | dt=925ms | rem=1718s
-  step 00650 | loss=1.0715 | lr=1.23e-02 | dt=923ms | rem=1672s
-  step 00700 | loss=1.0876 | lr=1.11e-02 | dt=925ms | rem=1625s
-  step 00750 | loss=1.0990 | lr=9.95e-03 | dt=927ms | rem=1579s
+  Speed benchmark: 893ms/step, ~21.2min/epoch
+  Time budget: 32.6 min
+  step 00000 | loss=1.9308 | lr=0.00e+00 | dt=764ms | rem=1954s
+  step 00050 | loss=1.2667 | lr=1.41e-02 | dt=767ms | rem=1918s
+  step 00100 | loss=1.1604 | lr=2.00e-02 | dt=775ms | rem=1879s
+  step 00150 | loss=1.2428 | lr=1.98e-02 | dt=782ms | rem=1840s
+  step 00200 | loss=1.1501 | lr=1.96e-02 | dt=780ms | rem=1801s
+  step 00250 | loss=1.1810 | lr=1.91e-02 | dt=776ms | rem=1762s
+  step 00300 | loss=1.1517 | lr=1.86e-02 | dt=777ms | rem=1723s
+  step 00350 | loss=1.1573 | lr=1.80e-02 | dt=779ms | rem=1685s
+  step 00400 | loss=1.2386 | lr=1.72e-02 | dt=784ms | rem=1646s
+  step 00450 | loss=1.1182 | lr=1.64e-02 | dt=779ms | rem=1607s
+  step 00500 | loss=1.1422 | lr=1.54e-02 | dt=777ms | rem=1568s
+  step 00550 | loss=1.0882 | lr=1.44e-02 | dt=780ms | rem=1529s
+  step 00600 | loss=1.0988 | lr=1.34e-02 | dt=785ms | rem=1490s
+  step 00650 | loss=1.0726 | lr=1.23e-02 | dt=791ms | rem=1451s
+  step 00700 | loss=1.0840 | lr=1.11e-02 | dt=778ms | rem=1412s
+  step 00750 | loss=1.0935 | lr=9.95e-03 | dt=778ms | rem=1373s
+  step 00800 | loss=1.0816 | lr=8.80e-03 | dt=781ms | rem=1334s
+  step 00850 | loss=1.0339 | lr=7.66e-03 | dt=779ms | rem=1295s
+  step 00900 | loss=1.1446 | lr=6.55e-03 | dt=782ms | rem=1255s
+  step 00950 | loss=1.1049 | lr=5.48e-03 | dt=793ms | rem=1216s
+  step 01000 | loss=1.0763 | lr=4.48e-03 | dt=781ms | rem=1177s
+  step 01050 | loss=1.0541 | lr=3.55e-03 | dt=780ms | rem=1138s
+  step 01100 | loss=1.0539 | lr=2.71e-03 | dt=780ms | rem=1099s
+  step 01150 | loss=1.0294 | lr=1.97e-03 | dt=779ms | rem=1060s
+  step 01200 | loss=1.0308 | lr=1.33e-03 | dt=780ms | rem=1021s
+  step 01250 | loss=1.0218 | lr=8.13e-04 | dt=779ms | rem=982s
+  step 01300 | loss=1.0425 | lr=4.18e-04 | dt=783ms | rem=943s
+  step 01350 | loss=1.0433 | lr=1.51e-04 | dt=783ms | rem=904s
+  step 01400 | loss=1.0488 | lr=1.68e-05 | dt=782ms | rem=864s
+  step 01450 | loss=1.0783 | lr=0.00e+00 | dt=781ms | rem=825s
+  step 01500 | loss=1.0843 | lr=0.00e+00 | dt=781ms | rem=786s
+  step 01550 | loss=1.0320 | lr=0.00e+00 | dt=783ms | rem=747s
+  step 01600 | loss=1.0488 | lr=0.00e+00 | dt=781ms | rem=708s
+  step 01650 | loss=1.0135 | lr=0.00e+00 | dt=779ms | rem=668s
+  step 01700 | loss=1.0712 | lr=0.00e+00 | dt=782ms | rem=629s
+  step 01750 | loss=1.0576 | lr=0.00e+00 | dt=781ms | rem=590s
+  step 01800 | loss=1.0101 | lr=0.00e+00 | dt=783ms | rem=551s
+  step 01850 | loss=1.0213 | lr=0.00e+00 | dt=782ms | rem=512s
+  step 01900 | loss=1.0570 | lr=0.00e+00 | dt=779ms | rem=473s
+  step 01950 | loss=1.0212 | lr=0.00e+00 | dt=791ms | rem=433s
+  step 02000 | loss=1.0379 | lr=0.00e+00 | dt=775ms | rem=394s
+  step 02050 | loss=1.1411 | lr=0.00e+00 | dt=792ms | rem=355s
+  step 02100 | loss=1.0966 | lr=0.00e+00 | dt=783ms | rem=316s
+  step 02150 | loss=1.0491 | lr=0.00e+00 | dt=778ms | rem=277s
+  step 02200 | loss=1.0265 | lr=0.00e+00 | dt=783ms | rem=238s
+  step 02250 | loss=1.0556 | lr=0.00e+00 | dt=784ms | rem=199s
+  step 02300 | loss=1.0496 | lr=0.00e+00 | dt=790ms | rem=159s
+  step 02350 | loss=1.0598 | lr=0.00e+00 | dt=779ms | rem=120s
+  step 02400 | loss=1.0378 | lr=0.00e+00 | dt=785ms | rem=81s
+  step 02450 | loss=1.0699 | lr=0.00e+00 | dt=780ms | rem=42s
+  step 02500 | loss=1.0515 | lr=0.00e+00 | dt=775ms | rem=3s
+  Time budget reached (32.6 min)
+  Training done: 2505 steps in 1955s
+── Validation ──
+  val_loss: 0.0209
+── GB Linear Probe ──
+    GB human_enhancers_cohn: acc=0.6330 (1000 train, 1000 test)
+    GB human_enhancers_ensembl: acc=0.6616 (996 train, 996 test)
+    GB human_ensembl_regulatory: acc=0.4394 (999 train, 999 test)
+    Local cache not found for human_nontata_promoters, skipping
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=0.5710 (1000 train, 1000 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=0.7430 (1000 train, 1000 test)
+    GB demo_human_or_worm: acc=0.6340 (1000 train, 1000 test)
+    GB dummy_mouse_enhancers_ensembl: acc=0.6750 (120 train, 120 test)
+  Checkpoint → /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase3/002_muon.pt
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 2 (muon) done
+
+
+======================================================================
+EXPERIMENT 3: adaln_dit
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: adaln
+  attention_type: standard
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) with flash_attention_2 ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1893.64it/s]
+  Backbone transformer layers found: 22
+Total params:     105,981,952  (106.0M)
+Trainable params: 105,981,952  (106.0M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 714ms/step, ~17.0min/epoch
+  Time budget: 27.1 min
+  step 00000 | loss=1.5455 | lr=0.00e+00 | dt=726ms | rem=1623s
+  step 00050 | loss=1.2185 | lr=2.11e-04 | dt=720ms | rem=1588s
+  step 00100 | loss=1.1854 | lr=3.00e-04 | dt=722ms | rem=1552s
+  step 00150 | loss=1.1784 | lr=2.97e-04 | dt=721ms | rem=1516s
+  step 00200 | loss=1.1453 | lr=2.93e-04 | dt=724ms | rem=1480s
+  step 00250 | loss=1.1377 | lr=2.87e-04 | dt=725ms | rem=1444s
+  step 00300 | loss=1.1509 | lr=2.79e-04 | dt=725ms | rem=1408s
+  step 00350 | loss=1.1885 | lr=2.70e-04 | dt=724ms | rem=1371s
+  step 00400 | loss=1.1951 | lr=2.58e-04 | dt=722ms | rem=1335s
+  step 00450 | loss=1.1440 | lr=2.46e-04 | dt=729ms | rem=1299s
+  step 00500 | loss=1.0864 | lr=2.32e-04 | dt=737ms | rem=1262s
+  step 00550 | loss=1.1516 | lr=2.17e-04 | dt=728ms | rem=1226s
+  step 00600 | loss=1.1172 | lr=2.01e-04 | dt=728ms | rem=1190s
+  step 00650 | loss=1.0683 | lr=1.84e-04 | dt=724ms | rem=1153s
+  step 00700 | loss=1.1052 | lr=1.67e-04 | dt=730ms | rem=1117s
+  step 00750 | loss=1.0993 | lr=1.49e-04 | dt=725ms | rem=1080s
+  step 00800 | loss=1.1124 | lr=1.32e-04 | dt=731ms | rem=1044s
+  step 00850 | loss=1.1320 | lr=1.15e-04 | dt=725ms | rem=1008s
+  step 00900 | loss=1.0627 | lr=9.82e-05 | dt=727ms | rem=971s
+  step 00950 | loss=1.0699 | lr=8.22e-05 | dt=725ms | rem=935s
+  step 01000 | loss=1.0598 | lr=6.72e-05 | dt=726ms | rem=899s
+  step 01050 | loss=1.0764 | lr=5.33e-05 | dt=722ms | rem=863s
+  step 01100 | loss=1.0579 | lr=4.07e-05 | dt=727ms | rem=826s
+  step 01150 | loss=1.1096 | lr=2.95e-05 | dt=727ms | rem=790s
+  step 01200 | loss=1.0690 | lr=2.00e-05 | dt=725ms | rem=754s
+  step 01250 | loss=1.0753 | lr=1.22e-05 | dt=722ms | rem=717s
+  step 01300 | loss=1.0158 | lr=6.26e-06 | dt=725ms | rem=681s
+  step 01350 | loss=1.0730 | lr=2.27e-06 | dt=723ms | rem=645s
+  step 01400 | loss=1.0524 | lr=2.52e-07 | dt=733ms | rem=608s
+  step 01450 | loss=1.0601 | lr=0.00e+00 | dt=728ms | rem=572s
+  step 01500 | loss=1.0562 | lr=0.00e+00 | dt=723ms | rem=535s
+  step 01550 | loss=1.0761 | lr=0.00e+00 | dt=729ms | rem=499s
+  step 01600 | loss=1.0692 | lr=0.00e+00 | dt=725ms | rem=462s
+  step 01650 | loss=1.0834 | lr=0.00e+00 | dt=726ms | rem=426s
+  step 01700 | loss=1.0580 | lr=0.00e+00 | dt=724ms | rem=390s
+  step 01750 | loss=1.0723 | lr=0.00e+00 | dt=726ms | rem=353s
+  step 01800 | loss=1.0176 | lr=0.00e+00 | dt=726ms | rem=317s
+  step 01850 | loss=1.0325 | lr=0.00e+00 | dt=723ms | rem=281s
+  step 01900 | loss=1.0182 | lr=0.00e+00 | dt=724ms | rem=244s
+  step 01950 | loss=1.0789 | lr=0.00e+00 | dt=725ms | rem=208s
+  step 02000 | loss=0.9832 | lr=0.00e+00 | dt=726ms | rem=172s
+  step 02050 | loss=0.9804 | lr=0.00e+00 | dt=728ms | rem=135s
+  step 02100 | loss=1.0814 | lr=0.00e+00 | dt=726ms | rem=99s
+  step 02150 | loss=1.0007 | lr=0.00e+00 | dt=728ms | rem=63s
+  step 02200 | loss=1.0371 | lr=0.00e+00 | dt=726ms | rem=26s
+  Time budget reached (27.1 min)
+  Training done: 2238 steps in 1624s
+── Validation ──
+  val_loss: 0.0000
+── GB Linear Probe ──
+    GB human_enhancers_cohn: acc=0.6170 (1000 train, 1000 test)
+    GB human_enhancers_ensembl: acc=0.6787 (996 train, 996 test)
+    GB human_ensembl_regulatory: acc=0.4835 (999 train, 999 test)
+    Local cache not found for human_nontata_promoters, skipping
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=0.5640 (1000 train, 1000 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=0.7770 (1000 train, 1000 test)
+    GB demo_human_or_worm: acc=0.6540 (1000 train, 1000 test)
+    GB dummy_mouse_enhancers_ensembl: acc=0.7333 (120 train, 120 test)
+  Checkpoint → /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase3/003_adaln_dit.pt
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 3 (adaln_dit) done
+
+
+======================================================================
+EXPERIMENT 4: linear_attn_performer
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: additive
+  attention_type: performer
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) with flash_attention_2 ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 2037.71it/s]
+  Backbone transformer layers found: 22
+  Layer 0: replaced attn_norm with performer
+  Layer 1: replaced attn_norm with performer
+  Layer 2: replaced attn_norm with performer
+  Layer 3: replaced attn_norm with performer
+  Layer 4: replaced attn_norm with performer
+  Layer 5: replaced attn_norm with performer
+  Layer 6: replaced attn_norm with performer
+  Layer 7: replaced attn_norm with performer
+  Layer 8: replaced attn_norm with performer
+  Layer 9: replaced attn_norm with performer
+  Layer 10: replaced attn_norm with performer
+  Layer 11: replaced attn_norm with performer
+  Layer 12: replaced attn_norm with performer
+  Layer 13: replaced attn_norm with performer
+  Layer 14: replaced attn_norm with performer
+  Layer 15: replaced attn_norm with performer
+  Layer 16: replaced attn_norm with performer
+  Layer 17: replaced attn_norm with performer
+  Layer 18: replaced attn_norm with performer
+  Layer 19: replaced attn_norm with performer
+  Layer 20: replaced attn_norm with performer
+  Layer 21: replaced attn_norm with performer
+Total params:     123,295,232  (123.3M)
+Trainable params: 123,295,232  (123.3M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 1443ms/step, ~34.3min/epoch
+  Time budget: 49.6 min
+  step 00000 | loss=1.7742 | lr=0.00e+00 | dt=1443ms | rem=2974s
+  step 00050 | loss=1.3183 | lr=2.11e-04 | dt=1437ms | rem=2904s
+  step 00100 | loss=1.2207 | lr=3.00e-04 | dt=1443ms | rem=2832s
+  step 00150 | loss=1.1538 | lr=2.97e-04 | dt=1442ms | rem=2760s
+  step 00200 | loss=1.1757 | lr=2.93e-04 | dt=1444ms | rem=2688s
+  step 00250 | loss=1.1527 | lr=2.87e-04 | dt=1446ms | rem=2616s
+  step 00300 | loss=1.1456 | lr=2.79e-04 | dt=1443ms | rem=2543s
+  step 00350 | loss=1.1544 | lr=2.70e-04 | dt=1451ms | rem=2471s
+  step 00400 | loss=1.1324 | lr=2.58e-04 | dt=1443ms | rem=2398s
+  step 00450 | loss=1.1545 | lr=2.46e-04 | dt=1443ms | rem=2326s
+  step 00500 | loss=1.1689 | lr=2.32e-04 | dt=1449ms | rem=2254s
+  step 00550 | loss=1.1300 | lr=2.17e-04 | dt=1448ms | rem=2181s
+  step 00600 | loss=1.1798 | lr=2.01e-04 | dt=1455ms | rem=2109s
+  step 00650 | loss=1.1319 | lr=1.84e-04 | dt=1449ms | rem=2037s
+  step 00700 | loss=1.1415 | lr=1.67e-04 | dt=1447ms | rem=1964s
+  step 00750 | loss=1.1166 | lr=1.49e-04 | dt=1447ms | rem=1892s
+  step 00800 | loss=1.1229 | lr=1.32e-04 | dt=1444ms | rem=1820s
+  step 00850 | loss=1.0689 | lr=1.15e-04 | dt=1443ms | rem=1747s
+  step 00900 | loss=1.1222 | lr=9.82e-05 | dt=1450ms | rem=1675s
+  step 00950 | loss=1.1581 | lr=8.22e-05 | dt=1450ms | rem=1602s
+  step 01000 | loss=1.1161 | lr=6.72e-05 | dt=1448ms | rem=1530s
+  step 01050 | loss=1.0669 | lr=5.33e-05 | dt=1452ms | rem=1457s
+  step 01100 | loss=1.1331 | lr=4.07e-05 | dt=1450ms | rem=1385s
+  step 01150 | loss=1.0992 | lr=2.95e-05 | dt=1456ms | rem=1312s
+  step 01200 | loss=1.1290 | lr=2.00e-05 | dt=1452ms | rem=1239s
+  step 01250 | loss=1.1679 | lr=1.22e-05 | dt=1452ms | rem=1167s
+  step 01300 | loss=1.1527 | lr=6.26e-06 | dt=1452ms | rem=1094s
+  step 01350 | loss=1.0979 | lr=2.27e-06 | dt=1474ms | rem=1022s
+  step 01400 | loss=1.1098 | lr=2.52e-07 | dt=1452ms | rem=949s
+  step 01450 | loss=1.1223 | lr=0.00e+00 | dt=1465ms | rem=876s
+  step 01500 | loss=1.1358 | lr=0.00e+00 | dt=1447ms | rem=804s
+  step 01550 | loss=1.1429 | lr=0.00e+00 | dt=1447ms | rem=732s
+  step 01600 | loss=1.1828 | lr=0.00e+00 | dt=1447ms | rem=659s
+  step 01650 | loss=1.2020 | lr=0.00e+00 | dt=1451ms | rem=587s
+  step 01700 | loss=1.1505 | lr=0.00e+00 | dt=1452ms | rem=514s
+  step 01750 | loss=1.1447 | lr=0.00e+00 | dt=1443ms | rem=442s
+  step 01800 | loss=1.0818 | lr=0.00e+00 | dt=1448ms | rem=369s
+  step 01850 | loss=1.1739 | lr=0.00e+00 | dt=1454ms | rem=297s
+  step 01900 | loss=1.1757 | lr=0.00e+00 | dt=1453ms | rem=224s
+  step 01950 | loss=1.1670 | lr=0.00e+00 | dt=1450ms | rem=151s
+  step 02000 | loss=1.1445 | lr=0.00e+00 | dt=1451ms | rem=79s
+  step 02050 | loss=1.1117 | lr=0.00e+00 | dt=1453ms | rem=6s
+  Time budget reached (49.6 min)
+  Training done: 2056 steps in 2975s
+── Validation ──
+  val_loss: 0.0131
+── GB Linear Probe ──
+    GB human_enhancers_cohn: acc=0.6390 (1000 train, 1000 test)
+    GB human_enhancers_ensembl: acc=0.6225 (996 train, 996 test)
+    GB human_ensembl_regulatory: acc=0.5365 (999 train, 999 test)
+    Local cache not found for human_nontata_promoters, skipping
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=0.5450 (1000 train, 1000 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=0.7540 (1000 train, 1000 test)
+    GB demo_human_or_worm: acc=0.6520 (1000 train, 1000 test)
+    GB dummy_mouse_enhancers_ensembl: acc=0.7083 (120 train, 120 test)
+  Checkpoint → /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase3/004_linear_attn_performer.pt
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 4 (linear_attn_performer) done
+
+
+======================================================================
+EXPERIMENT 5: linear_attn_retnet
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: additive
+  attention_type: retnet
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) with flash_attention_2 ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 2094.64it/s]
+  Backbone transformer layers found: 22
+  Layer 0: replaced attn_norm with retnet
+  Layer 1: replaced attn_norm with retnet
+  Layer 2: replaced attn_norm with retnet
+  Layer 3: replaced attn_norm with retnet
+  Layer 4: replaced attn_norm with retnet
+  Layer 5: replaced attn_norm with retnet
+  Layer 6: replaced attn_norm with retnet
+  Layer 7: replaced attn_norm with retnet
+  Layer 8: replaced attn_norm with retnet
+  Layer 9: replaced attn_norm with retnet
+  Layer 10: replaced attn_norm with retnet
+  Layer 11: replaced attn_norm with retnet
+  Layer 12: replaced attn_norm with retnet
+  Layer 13: replaced attn_norm with retnet
+  Layer 14: replaced attn_norm with retnet
+  Layer 15: replaced attn_norm with retnet
+  Layer 16: replaced attn_norm with retnet
+  Layer 17: replaced attn_norm with retnet
+  Layer 18: replaced attn_norm with retnet
+  Layer 19: replaced attn_norm with retnet
+  Layer 20: replaced attn_norm with retnet
+  Layer 21: replaced attn_norm with retnet
+Total params:     146,355,456  (146.4M)
+Trainable params: 146,355,456  (146.4M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 1130ms/step, ~26.8min/epoch
+  Time budget: 39.9 min
+  step 00000 | loss=1.8009 | lr=0.00e+00 | dt=1064ms | rem=2393s
+  step 00050 | loss=1.2934 | lr=2.11e-04 | dt=1055ms | rem=2342s
+  step 00100 | loss=1.1721 | lr=3.00e-04 | dt=1057ms | rem=2289s
+  step 00150 | loss=1.1306 | lr=2.97e-04 | dt=1054ms | rem=2236s
+  step 00200 | loss=1.1974 | lr=2.93e-04 | dt=1060ms | rem=2183s
+  step 00250 | loss=1.1536 | lr=2.87e-04 | dt=1060ms | rem=2130s
+  step 00300 | loss=1.0961 | lr=2.79e-04 | dt=1077ms | rem=2077s
+  step 00350 | loss=1.1293 | lr=2.70e-04 | dt=1063ms | rem=2023s
+  step 00400 | loss=1.1492 | lr=2.58e-04 | dt=1059ms | rem=1970s
+  step 00450 | loss=1.1776 | lr=2.46e-04 | dt=1064ms | rem=1917s
+  step 00500 | loss=1.1738 | lr=2.32e-04 | dt=1057ms | rem=1864s
+  step 00550 | loss=1.1814 | lr=2.17e-04 | dt=1066ms | rem=1811s
+  step 00600 | loss=1.1666 | lr=2.01e-04 | dt=1059ms | rem=1758s
+  step 00650 | loss=1.1332 | lr=1.84e-04 | dt=1062ms | rem=1705s
+  step 00700 | loss=1.1167 | lr=1.67e-04 | dt=1063ms | rem=1652s
+  step 00750 | loss=1.1500 | lr=1.49e-04 | dt=1061ms | rem=1598s
+  step 00800 | loss=1.0717 | lr=1.32e-04 | dt=1055ms | rem=1545s
+  step 00850 | loss=1.1329 | lr=1.15e-04 | dt=1058ms | rem=1492s
+  step 00900 | loss=1.1255 | lr=9.82e-05 | dt=1061ms | rem=1439s
+  step 00950 | loss=1.1692 | lr=8.22e-05 | dt=1062ms | rem=1386s
+  step 01000 | loss=1.1483 | lr=6.72e-05 | dt=1064ms | rem=1333s
+  step 01050 | loss=1.1417 | lr=5.33e-05 | dt=1060ms | rem=1280s
+  step 01100 | loss=1.1054 | lr=4.07e-05 | dt=1061ms | rem=1227s
+  step 01150 | loss=1.1182 | lr=2.95e-05 | dt=1071ms | rem=1174s
+  step 01200 | loss=1.1066 | lr=2.00e-05 | dt=1060ms | rem=1121s
+  step 01250 | loss=1.0832 | lr=1.22e-05 | dt=1062ms | rem=1068s
+  step 01300 | loss=1.0881 | lr=6.26e-06 | dt=1066ms | rem=1015s
+  step 01350 | loss=1.1693 | lr=2.27e-06 | dt=1066ms | rem=961s
+  step 01400 | loss=1.1502 | lr=2.52e-07 | dt=1068ms | rem=908s
+  step 01450 | loss=1.1334 | lr=0.00e+00 | dt=1061ms | rem=855s
+  step 01500 | loss=1.1297 | lr=0.00e+00 | dt=1061ms | rem=802s
+  step 01550 | loss=1.1045 | lr=0.00e+00 | dt=1060ms | rem=749s
+  step 01600 | loss=1.1599 | lr=0.00e+00 | dt=1061ms | rem=695s
+  step 01650 | loss=1.1765 | lr=0.00e+00 | dt=1062ms | rem=642s
+  step 01700 | loss=1.1146 | lr=0.00e+00 | dt=1063ms | rem=589s
+  step 01750 | loss=1.0901 | lr=0.00e+00 | dt=1061ms | rem=536s
+  step 01800 | loss=1.1199 | lr=0.00e+00 | dt=1064ms | rem=482s
+  step 01850 | loss=1.0869 | lr=0.00e+00 | dt=1059ms | rem=429s
+  step 01900 | loss=1.1093 | lr=0.00e+00 | dt=1059ms | rem=376s
+  step 01950 | loss=1.1078 | lr=0.00e+00 | dt=1061ms | rem=323s
+  step 02000 | loss=1.1588 | lr=0.00e+00 | dt=1059ms | rem=270s
+  step 02050 | loss=1.1276 | lr=0.00e+00 | dt=1086ms | rem=216s
+  step 02100 | loss=1.1457 | lr=0.00e+00 | dt=1067ms | rem=163s
+  step 02150 | loss=1.0911 | lr=0.00e+00 | dt=1067ms | rem=110s
+  step 02200 | loss=1.1250 | lr=0.00e+00 | dt=1067ms | rem=57s
+  step 02250 | loss=1.1152 | lr=0.00e+00 | dt=1068ms | rem=3s
+  Time budget reached (39.9 min)
+  Training done: 2254 steps in 2393s
+── Validation ──
+  val_loss: 0.0961
+── GB Linear Probe ──
+    GB human_enhancers_cohn: acc=0.5490 (1000 train, 1000 test)
+    GB human_enhancers_ensembl: acc=0.5873 (996 train, 996 test)
+    GB human_ensembl_regulatory: acc=0.4665 (999 train, 999 test)
+    Local cache not found for human_nontata_promoters, skipping
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=0.5350 (1000 train, 1000 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=0.6490 (1000 train, 1000 test)
+    GB demo_human_or_worm: acc=0.5960 (1000 train, 1000 test)
+    GB dummy_mouse_enhancers_ensembl: acc=0.6917 (120 train, 120 test)
+  Checkpoint → /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase3/005_linear_attn_retnet.pt
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 5 (linear_attn_retnet) done
+
+
+======================================================================
+Sweep 2–5 complete!
