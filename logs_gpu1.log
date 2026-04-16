@@ -16,7 +16,7 @@ EXPERIMENT 6: linear_attn_gla
 
 Loading NucEL backbone (FreakingPotato/NucEL) ...
 `torch_dtype` is deprecated! Use `dtype` instead!
-Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1796.83it/s]
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1772.76it/s]
 Loading NucEL vocab from FreakingPotato/NucEL ...
   vocab_size=27, mask_id=4, unk_id=1
   Backbone transformer layers found: 22
@@ -45,22 +45,85 @@ Loading NucEL vocab from FreakingPotato/NucEL ...
 Total params:     123,561,344  (123.6M)
 Trainable params: 123,561,344  (123.6M)
 batch=8, grad_accum=4, eff_tokens/step=32,768
-  Speed benchmark: 20466ms/step, ~486.1min/epoch
+  Speed benchmark: 1344ms/step, ~31.9min/epoch
+  Time budget: 46.5 min
+  step 00000 | loss=2.0412 | lr=0.00e+00 | dt=1141ms | rem=2789s
+  step 00050 | loss=1.3291 | lr=2.11e-04 | dt=1601ms | rem=2726s
+  step 00100 | loss=1.2319 | lr=3.00e-04 | dt=3969ms | rem=2594s
+  step 00150 | loss=1.2103 | lr=2.97e-04 | dt=4870ms | rem=2370s
+  step 00200 | loss=1.1496 | lr=2.93e-04 | dt=5916ms | rem=2104s
+  step 00250 | loss=1.2250 | lr=2.87e-04 | dt=6083ms | rem=1803s
+  step 00300 | loss=1.1745 | lr=2.79e-04 | dt=6118ms | rem=1498s
+  step 00350 | loss=1.1325 | lr=2.70e-04 | dt=6124ms | rem=1193s
+  step 00400 | loss=1.1711 | lr=2.58e-04 | dt=6115ms | rem=887s
+  step 00450 | loss=1.1251 | lr=2.46e-04 | dt=6117ms | rem=581s
+  step 00500 | loss=1.1422 | lr=2.32e-04 | dt=6118ms | rem=275s
+  Time budget reached (46.5 min)
+  Training done: 546 steps in 2790s
+── Validation ──
+  val_loss: 0.0261
+── GB Linear Probe ──
+    GB human_enhancers_cohn: acc=0.4850 (200 train, 200 test)
+    GB human_enhancers_ensembl: acc=0.5300 (200 train, 200 test)
+    GB human_ensembl_regulatory: acc=0.3485 (198 train, 198 test)
+    Local cache not found for human_nontata_promoters, skipping
+    GB human_nontata_promoters: too few samples (0)
+    GB human_ocr_ensembl: acc=0.5950 (200 train, 200 test)
+    GB demo_coding_vs_intergenomic_seqs: acc=0.5500 (200 train, 200 test)
+    GB demo_human_or_worm: acc=0.5200 (200 train, 200 test)
+    GB dummy_mouse_enhancers_ensembl: acc=0.5000 (30 train, 30 test)
+  Checkpoint → /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase3/006_linear_attn_gla.pt
+Logged → /home/stark/AutoResearch_Diffusion_Model/results_phase3.tsv
+
+✓ Experiment 6 (linear_attn_gla) done
+
+
+======================================================================
+EXPERIMENT 7: linear_attn_mamba2
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: additive
+  attention_type: mamba2
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 2040.71it/s]
+  Backbone transformer layers found: 22
+  Layer 0: replaced attn_norm with mamba2
+  Layer 1: replaced attn_norm with mamba2
+  Layer 2: replaced attn_norm with mamba2
+  Layer 3: replaced attn_norm with mamba2
+  Layer 4: replaced attn_norm with mamba2
+  Layer 5: replaced attn_norm with mamba2
+  Layer 6: replaced attn_norm with mamba2
+  Layer 7: replaced attn_norm with mamba2
+  Layer 8: replaced attn_norm with mamba2
+  Layer 9: replaced attn_norm with mamba2
+  Layer 10: replaced attn_norm with mamba2
+  Layer 11: replaced attn_norm with mamba2
+  Layer 12: replaced attn_norm with mamba2
+  Layer 13: replaced attn_norm with mamba2
+  Layer 14: replaced attn_norm with mamba2
+  Layer 15: replaced attn_norm with mamba2
+  Layer 16: replaced attn_norm with mamba2
+  Layer 17: replaced attn_norm with mamba2
+  Layer 18: replaced attn_norm with mamba2
+  Layer 19: replaced attn_norm with mamba2
+  Layer 20: replaced attn_norm with mamba2
+  Layer 21: replaced attn_norm with mamba2
+Total params:     136,590,624  (136.6M)
+Trainable params: 136,590,624  (136.6M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 23994ms/step, ~569.8min/epoch
   Time budget: 90.0 min
-  step 00000 | loss=2.0113 | lr=0.00e+00 | dt=1525ms | rem=5400s
-  step 00050 | loss=1.3638 | lr=2.11e-04 | dt=1911ms | rem=5319s
-  step 00100 | loss=1.2401 | lr=3.00e-04 | dt=2141ms | rem=5217s
-  step 00150 | loss=1.2031 | lr=2.97e-04 | dt=2607ms | rem=5094s
-  step 00200 | loss=1.1434 | lr=2.93e-04 | dt=2565ms | rem=4963s
-  step 00250 | loss=1.2341 | lr=2.87e-04 | dt=2665ms | rem=4830s
-  step 00300 | loss=1.1663 | lr=2.79e-04 | dt=2655ms | rem=4697s
-  step 00350 | loss=1.1298 | lr=2.70e-04 | dt=2727ms | rem=4560s
-  step 00400 | loss=1.1692 | lr=2.58e-04 | dt=2759ms | rem=4427s
-  step 00450 | loss=1.1178 | lr=2.46e-04 | dt=3138ms | rem=4272s
-  step 00500 | loss=1.1407 | lr=2.32e-04 | dt=4397ms | rem=4046s
-  step 00550 | loss=1.1506 | lr=2.17e-04 | dt=3837ms | rem=3872s
-  step 00600 | loss=1.1250 | lr=2.01e-04 | dt=6105ms | rem=3635s
-  step 00650 | loss=1.1598 | lr=1.84e-04 | dt=6125ms | rem=3329s
-  step 00700 | loss=1.1397 | lr=1.67e-04 | dt=6120ms | rem=3023s
-  step 00750 | loss=1.1378 | lr=1.49e-04 | dt=6121ms | rem=2717s
-  step 00800 | loss=1.1463 | lr=1.32e-04 | dt=6117ms | rem=2411s
+  step 00000 | loss=2.1977 | lr=0.00e+00 | dt=5564ms | rem=5400s
+  step 00050 | loss=1.3725 | lr=2.11e-04 | dt=6784ms | rem=5093s
+  step 00100 | loss=1.2632 | lr=3.00e-04 | dt=6788ms | rem=4754s
+  step 00150 | loss=1.1654 | lr=2.97e-04 | dt=6791ms | rem=4414s
+  step 00200 | loss=1.1514 | lr=2.93e-04 | dt=6806ms | rem=4074s

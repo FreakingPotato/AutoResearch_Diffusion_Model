@@ -1,12 +1,6 @@
 exp_id	exp_idx	timestamp	optimizer	lr	time_embed	attention_type	total_params_M	trainable_params_M	train_steps	training_seconds	total_seconds	final_train_loss	val_loss	peak_vram_mb	gb_acc_human_enhancers_cohn	gb_acc_human_enhancers_ensembl	gb_acc_human_ensembl_regulatory	gb_acc_human_nontata_promoters	gb_acc_human_ocr_ensembl	gb_acc_demo_coding_vs_intergenomic_seqs	gb_acc_demo_human_or_worm	gb_acc_dummy_mouse_enhancers_ensembl
-nucel_frozen_probe	0	2026-04-16T01:04:08.086043	none	0	additive	standard	0.0	0.0	0	0.0	1616.1	nan	nan	0	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-diffusion_baseline	1	2026-04-16T02:32:02.347251	adamw	0.0003	additive	standard	100.2	100.2	4143	3673.1	5274.3	1.295141	0.063261	6102	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-muon	2	2026-04-16T02:32:03.149070	muon	0.02	additive	standard	0.0	0.0	0.0	0.0	0.0	nan	nan	0	nan	nan	nan	nan	nan	nan	nan	nan
-linear_attn_gla	6	2026-04-16T02:36:22.276162	adamw	0.0003	additive	gla	123.6	123.6	1197	5403.6	7145.9	1.175200	0.013012	8818	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-adaln_dit	3	2026-04-16T03:28:29.445719	adamw	0.0003	adaln	standard	106.0	106.0	2102	1835.8	3386.3	1.264341	0.075714	6553	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-linear_attn_mamba2	7	2026-04-16T04:34:09.124023	adamw	0.0003	additive	mamba2	123.7	123.7	1203	5404.2	7066.6	0.965769	0.019011	8990	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-linear_attn_performer	4	2026-04-16T04:47:20.899397	adamw	0.0003	additive	performer	123.3	123.3	1981	3154.7	4731.2	0.608744	0.015497	12811	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-hybrid_attn	8	2026-04-16T05:38:32.114064	adamw	0.0003	additive	hybrid_gla	116.1	116.1	694	2296.4	3862.7	1.242911	0.021432	8990	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
-muon_adaln	9	2026-04-16T05:38:33.023579	muon	0.02	adaln	standard	0.0	0.0	0.0	0.0	0.0	nan	nan	0	nan	nan	nan	nan	nan	nan	nan	nan
-muon_linear	10	2026-04-16T05:38:33.652041	muon	0.02	additive	gla	0.0	0.0	0.0	0.0	0.0	nan	nan	0	nan	nan	nan	nan	nan	nan	nan	nan
-linear_attn_retnet	5	2026-04-16T06:45:10.862334	adamw	0.0003	additive	retnet	146.4	146.4	4495	5400.1	7069.7	1.111185	0.046542	12811	1.000000	1.000000	1.000000	nan	1.000000	1.000000	1.000000	1.000000
+nucel_frozen_probe	0	2026-04-16T06:52:12.403657	none	0	additive	standard	0.0	0.0	0	0.0	39.1	nan	nan	0	0.595000	0.570000	0.459596	nan	0.560000	0.755000	0.565000	0.500000
+diffusion_baseline	1	2026-04-16T07:24:52.071891	adamw	0.0003	additive	standard	100.2	100.2	2249	1915.1	1959.7	1.609100	0.000055	6102	0.530000	0.515000	0.525253	nan	0.485000	0.665000	0.660000	0.500000
+muon	2	2026-04-16T07:24:53.932332	muon	0.02	additive	standard	0.0	0.0	0.0	0.0	0.0	nan	nan	0	nan	nan	nan	nan	nan	nan	nan	nan
+linear_attn_gla	6	2026-04-16T07:41:13.309697	adamw	0.0003	additive	gla	123.6	123.6	546	2789.7	2975.9	1.152797	0.026149	8818	0.485000	0.530000	0.348485	nan	0.595000	0.550000	0.520000	0.500000
+adaln_dit	3	2026-04-16T07:57:00.605670	adamw	0.0003	adaln	standard	106.0	106.0	2173	1881.8	1926.6	1.291093	0.000034	6553	0.655000	0.610000	0.297980	nan	0.480000	0.700000	0.605000	0.600000

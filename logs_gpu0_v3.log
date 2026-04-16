@@ -1,0 +1,44 @@
+Using GPU 0
+Running experiments 2–5  (4 total)  on GPU 0
+
+======================================================================
+EXPERIMENT 2: muon
+======================================================================
+  optimizer: muon
+  lr: 0.02
+  time_embed: additive
+  attention_type: standard
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 66/134 [00:00<00:00, 627.18it/s]Loading weights:  96%|█████████▋| 129/134 [00:00<00:00, 594.74it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 596.68it/s]
+Loading NucEL vocab from FreakingPotato/NucEL ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  vocab_size=27, mask_id=4, unk_id=1
+  Backbone transformer layers found: 22
+Total params:     100,203,520  (100.2M)
+Trainable params: 100,203,520  (100.2M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 1062ms/step, ~25.2min/epoch
+  Time budget: 37.8 min
+  step 00000 | loss=1.7238 | lr=0.00e+00 | dt=904ms | rem=2268s
+  step 00050 | loss=1.2129 | lr=1.41e-02 | dt=907ms | rem=2225s
+  step 00100 | loss=1.1923 | lr=2.00e-02 | dt=920ms | rem=2179s
+  step 00150 | loss=1.2409 | lr=1.98e-02 | dt=922ms | rem=2133s
+  step 00200 | loss=1.1905 | lr=1.96e-02 | dt=921ms | rem=2087s
+  step 00250 | loss=1.2337 | lr=1.91e-02 | dt=920ms | rem=2041s
+  step 00300 | loss=1.1603 | lr=1.86e-02 | dt=921ms | rem=1995s
+  step 00350 | loss=1.1569 | lr=1.80e-02 | dt=921ms | rem=1949s
+  step 00400 | loss=1.1964 | lr=1.72e-02 | dt=924ms | rem=1903s
+  step 00450 | loss=1.1142 | lr=1.64e-02 | dt=922ms | rem=1856s
+  step 00500 | loss=1.1433 | lr=1.54e-02 | dt=922ms | rem=1810s
+  step 00550 | loss=1.0853 | lr=1.44e-02 | dt=924ms | rem=1764s
+  step 00600 | loss=1.1000 | lr=1.34e-02 | dt=925ms | rem=1718s
+  step 00650 | loss=1.0715 | lr=1.23e-02 | dt=923ms | rem=1672s
+  step 00700 | loss=1.0876 | lr=1.11e-02 | dt=925ms | rem=1625s
+  step 00750 | loss=1.0990 | lr=9.95e-03 | dt=927ms | rem=1579s

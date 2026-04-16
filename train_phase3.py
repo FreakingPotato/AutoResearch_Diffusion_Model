@@ -579,11 +579,12 @@ class NucELDiffusionV3(nn.Module):
 
 def build_model(cfg: Phase3Config, device):
     from transformers import AutoModel
-    print(f"Loading NucEL backbone ({NUCEL_REPO}) ...")
+    print(f"Loading NucEL backbone ({NUCEL_REPO}) with flash_attention_2 ...")
     backbone = AutoModel.from_pretrained(
         NUCEL_REPO,
         trust_remote_code=True,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
+        attn_implementation='flash_attention_2',
     ).to(device)
 
     _, _, mask_id, _, _ = get_tokenizer()
@@ -747,7 +748,8 @@ def evaluate_gb_linear_probe(model, device, seq_len=DEFAULT_SEQ_LEN, frozen_nuce
     if frozen_nucel:
         from transformers import AutoModel
         frozen_backbone = AutoModel.from_pretrained(
-            NUCEL_REPO, trust_remote_code=True, torch_dtype=torch.bfloat16
+            NUCEL_REPO, trust_remote_code=True, dtype=torch.bfloat16,
+            attn_implementation='flash_attention_2',
         ).to(device)
         frozen_backbone.eval()
 

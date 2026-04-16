@@ -1,0 +1,54 @@
+Using GPU 1
+Running experiments 7–10  (4 total)  on GPU 1
+
+======================================================================
+EXPERIMENT 7: linear_attn_mamba2
+======================================================================
+  optimizer: adamw
+  lr: 0.0003
+  time_embed: additive
+  attention_type: mamba2
+  noise_steps: 128
+  dropout: 0.0
+  seq_len: 1024
+  batch_size: 8
+  weight_decay: 0.01
+
+Loading NucEL backbone (FreakingPotato/NucEL) ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1891.93it/s]
+Loading NucEL vocab from FreakingPotato/NucEL ...
+  vocab_size=27, mask_id=4, unk_id=1
+  Backbone transformer layers found: 22
+  Layer 0: replaced attn_norm with mamba2
+  Layer 1: replaced attn_norm with mamba2
+  Layer 2: replaced attn_norm with mamba2
+  Layer 3: replaced attn_norm with mamba2
+  Layer 4: replaced attn_norm with mamba2
+  Layer 5: replaced attn_norm with mamba2
+  Layer 6: replaced attn_norm with mamba2
+  Layer 7: replaced attn_norm with mamba2
+  Layer 8: replaced attn_norm with mamba2
+  Layer 9: replaced attn_norm with mamba2
+  Layer 10: replaced attn_norm with mamba2
+  Layer 11: replaced attn_norm with mamba2
+  Layer 12: replaced attn_norm with mamba2
+  Layer 13: replaced attn_norm with mamba2
+  Layer 14: replaced attn_norm with mamba2
+  Layer 15: replaced attn_norm with mamba2
+  Layer 16: replaced attn_norm with mamba2
+  Layer 17: replaced attn_norm with mamba2
+  Layer 18: replaced attn_norm with mamba2
+  Layer 19: replaced attn_norm with mamba2
+  Layer 20: replaced attn_norm with mamba2
+  Layer 21: replaced attn_norm with mamba2
+Total params:     136,590,624  (136.6M)
+Trainable params: 136,590,624  (136.6M)
+batch=8, grad_accum=4, eff_tokens/step=32,768
+  Speed benchmark: 3960ms/step, ~94.0min/epoch
+  Time budget: 90.0 min
+  step 00000 | loss=2.3281 | lr=0.00e+00 | dt=1189ms | rem=5400s
+  step 00050 | loss=1.3235 | lr=2.11e-04 | dt=1986ms | rem=5331s
+  step 00100 | loss=1.2381 | lr=3.00e-04 | dt=4535ms | rem=5174s
+  step 00150 | loss=1.1585 | lr=2.97e-04 | dt=5491ms | rem=4920s
