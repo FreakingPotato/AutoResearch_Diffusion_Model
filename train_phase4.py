@@ -465,11 +465,15 @@ class LinearProbe(nn.Module):
         super().__init__(); self.fc = nn.Linear(dim, n_classes)
     def forward(self, x): return self.fc(x)
 
-def train_linear_probe(embs, labels, epochs=3, lr=1e-3):
-    device = embs.device; probe = LinearProbe(embs.shape[1], len(set(labels.tolist()))).to(device)
+def train_linear_probe(embs, labels, epochs=5, lr=1e-3):
+    """Train linear probe on CPU to avoid GPU memory conflicts."""
+    embs = embs.detach().float().cpu()
+    labels = labels.cpu()
+    n_classes = len(set(labels.tolist()))
+    probe = nn.Linear(embs.shape[1], n_classes)  # plain nn.Linear, no wrapper
     opt = torch.optim.Adam(probe.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
-    ds = torch.utils.data.TensorDataset(embs, labels.to(device))
+    ds = torch.utils.data.TensorDataset(embs, labels)
     loader = DataLoader(ds, batch_size=64, shuffle=True)
     probe.train()
     for _ in range(epochs):
@@ -481,8 +485,8 @@ def train_linear_probe(embs, labels, epochs=3, lr=1e-3):
 def eval_probe(probe, embs, labels):
     probe.eval()
     with torch.no_grad():
-        preds = probe(embs.to(next(probe.parameters()).device)).argmax(dim=-1)
-        return (preds == labels.to(preds.device)).float().mean().item()
+        preds = probe(embs.float().cpu()).argmax(dim=-1)
+        return (preds == labels.cpu()).float().mean().item()
 
 @torch.no_grad()
 def evaluate_gb(model, device, seq_len=DEFAULT_SEQ_LEN, sample_frac=0.20, max_seqs=2000):
