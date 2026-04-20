@@ -1,0 +1,72 @@
+============================================================
+Finding best experiment from Phase 4 results ...
+Best: exp 7 (avg GB acc=0.6671)
+
+Loading model for exp 7 ...
+Loading NucEL (FreakingPotato/NucEL) flash_attention_2 ...
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1849.65it/s]
+Loading NucEL vocab from FreakingPotato/NucEL ...
+  vocab_size=27, mask_id=4
+  Backbone layers: 22
+  Layer 0: replaced attn_norm with mamba2
+  Layer 1: replaced attn_norm with mamba2
+  Layer 2: replaced attn_norm with mamba2
+  Layer 3: replaced attn_norm with mamba2
+  Layer 4: replaced attn_norm with mamba2
+  Layer 5: replaced attn_norm with mamba2
+  Layer 6: replaced attn_norm with mamba2
+  Layer 7: replaced attn_norm with mamba2
+  Layer 8: replaced attn_norm with mamba2
+  Layer 9: replaced attn_norm with mamba2
+  Layer 10: replaced attn_norm with mamba2
+  Layer 11: replaced attn_norm with mamba2
+  Layer 12: replaced attn_norm with mamba2
+  Layer 13: replaced attn_norm with mamba2
+  Layer 14: replaced attn_norm with mamba2
+  Layer 15: replaced attn_norm with mamba2
+  Layer 16: replaced attn_norm with mamba2
+  Layer 17: replaced attn_norm with mamba2
+  Layer 18: replaced attn_norm with mamba2
+  Layer 19: replaced attn_norm with mamba2
+  Layer 20: replaced attn_norm with mamba2
+  Layer 21: replaced attn_norm with mamba2
+Loaded 379/379 params
+
+============================================================
+FULL GB EVAL: exp 7 (mamba2_adamw)
+============================================================
+  human_enhancers_cohn: 22232 train, 5559 test ... acc=0.6730 (311s)
+  human_enhancers_ensembl: 123363 train, 30841 test ... acc=0.7499 (1724s)
+  human_ensembl_regulatory: 231248 train, 57813 test ... acc=0.5935 (3250s)
+  human_nontata_promoters: too few (0)
+  human_ocr_ensembl: 139804 train, 34952 test ... acc=0.6056 (1956s)
+  demo_coding_vs_intergenomic_seqs: 80000 train, 20000 test ... acc=0.8594 (1105s)
+  demo_human_or_worm: 80000 train, 20000 test ... acc=0.8928 (1113s)
+  dummy_mouse_enhancers_ensembl: 968 train, 242 test ... Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+acc=0.6942 (14s)
+
+Average full GB acc: 0.7240
+
+============================================================
+FROZEN NucEL BASELINE (full GB)
+============================================================
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1950.45it/s]
+  human_enhancers_cohn: 22232 train, 5559 test ... acc=0.6690 (233s)
+  human_enhancers_ensembl: 123363 train, 30841 test ... acc=0.7389 (1300s)
+  human_ensembl_regulatory: 231248 train, 57813 test ... acc=0.5899 (2454s)
+  human_nontata_promoters: too few (0)
+  human_ocr_ensembl: 139804 train, 34952 test ... acc=0.6170 (1474s)
+  demo_coding_vs_intergenomic_seqs: 80000 train, 20000 test ... acc=0.8238 (839s)
+  demo_human_or_worm: 80000 train, 20000 test ... acc=0.8148 (840s)
+  dummy_mouse_enhancers_ensembl: 968 train, 242 test ... acc=0.6694 (10s)
+
+Average frozen NucEL GB acc: 0.7033
+
+============================================================
+SAVING RESULTS
+============================================================
+Saved → /home/stark/AutoResearch_Diffusion_Model/results_v41_full_gb.tsv
+
+Best v4 (exp 7): sampled=0.6671 → full=0.7240
+Frozen NucEL baseline: 0.7033
+Improvement over baseline: 0.0208
