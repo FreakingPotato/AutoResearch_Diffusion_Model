@@ -88,12 +88,15 @@ def main():
     parser.add_argument("--local_rank", type=int, default=-1)
     args = parser.parse_args()
 
-    # Initialize distributed — read LOCAL_RANK set by torchrun; fall back to 0
+    # Initialize distributed
     local_rank = int(os.environ.get("LOCAL_RANK", args.local_rank if args.local_rank >= 0 else 0))
     world_size = int(os.environ.get("WORLD_SIZE", 1))
+    if world_size > 1 and not dist.is_initialized():
+        dist.init_process_group(backend="nccl")
 
     # Set device
-    device = torch.device(f"cuda:{local_rank}") if torch.cuda.is_available() else torch.device("cpu")
+    device = torch.device(f"cuda:{local_rank}")
+    torch.cuda.set_device(device)
 
     # Wandb initialization (only on main process)
     if args.use_wandb and local_rank == 0:
@@ -136,14 +139,13 @@ def main():
         dropout=0.0,
     )
     model = build_model(config, device, mask_id=4)
-    # Ensure model is on correct device (Mamba2 needs CUDA)
-    if device.type == 'cuda' and not next(model.parameters()).is_cuda:
-        model = model.cuda()
-    # Cast to bfloat16
-    model = model.to(dtype=torch.bfloat16)
+    # Ensure model is on correct device and dtype
+    model = model.to(device=device, dtype=torch.bfloat16)
 
     # Load stage 1 checkpoint
     load_stage1_checkpoint(model, device)
+    # Ensure model is on correct device after checkpoint loading
+    model = model.to(device=device, dtype=torch.bfloat16)
 
     # Prepare data
     build_full_data(args.seq_len)
@@ -267,6 +269,9 @@ def main():
         }, final_ckpt_path)
         print(f"Final checkpoint saved to {final_ckpt_path}")
         print(f"\n=== Done: {step} steps in {train_time:.0f}s ({train_time/3600:.1f}h) ===")
+
+    if world_size > 1:
+        dist.destroy_process_group()
 
 
 if __name__ == "__main__":

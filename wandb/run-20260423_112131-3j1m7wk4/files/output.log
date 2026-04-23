@@ -1,0 +1,4 @@
+
+=== Starting Training ===
+  Seq len: 8192
+  Batch size: 3 per GPU

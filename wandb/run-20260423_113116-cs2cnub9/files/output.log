@@ -1,0 +1,39 @@
+
+=== Starting Training ===
+  Seq len: 8192
+  Batch size: 3 per GPU
+  LR: 0.0003
+  Max steps: 16000
+  Use Wandb: True
+  World size: 1
+Loading NucEL (FreakingPotato/NucEL) flash_attention_2 ...
+Loading weights: 100%|██████████| 134/134 [00:00<00:00, 2083.48it/s]
+  Backbone layers: 22
+  Layer 0: replaced attn_norm with mamba2
+  Layer 1: replaced attn_norm with mamba2
+  Layer 2: replaced attn_norm with mamba2
+  Layer 3: replaced attn_norm with mamba2
+  Layer 4: replaced attn_norm with mamba2
+  Layer 5: replaced attn_norm with mamba2
+  Layer 6: replaced attn_norm with mamba2
+  Layer 7: replaced attn_norm with mamba2
+  Layer 8: replaced attn_norm with mamba2
+  Layer 9: replaced attn_norm with mamba2
+  Layer 10: replaced attn_norm with mamba2
+  Layer 11: replaced attn_norm with mamba2
+  Layer 12: replaced attn_norm with mamba2
+  Layer 13: replaced attn_norm with mamba2
+  Layer 14: replaced attn_norm with mamba2
+  Layer 15: replaced attn_norm with mamba2
+  Layer 16: replaced attn_norm with mamba2
+  Layer 17: replaced attn_norm with mamba2
+  Layer 18: replaced attn_norm with mamba2
+  Layer 19: replaced attn_norm with mamba2
+  Layer 20: replaced attn_norm with mamba2
+  Layer 21: replaced attn_norm with mamba2
+Model: 136.6M total, 136.6M trainable
+Loading stage 1 checkpoint from /home/stark/AutoResearch_Diffusion_Model/checkpoints_phase4_2/stage1_seq4096_best.pt...
+Loaded 49/379 params from stage 1
+  train: 376,986 sequences (seq_len=8192)
+step 00000 | loss=1.3890 | lr=0.000000 | dt=14639ms | rem=240min
+step 00200 | loss=1.4614 | lr=0.000120 | dt=843ms | rem=237min
