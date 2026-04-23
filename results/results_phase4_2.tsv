@@ -1,0 +1,2 @@
+stage	seq_len	timestamp	total_params_M	trainable_params_M	train_steps	training_seconds	total_seconds	final_train_loss	val_loss	peak_vram_mb	data_size	gb_acc_human_enhancers_cohn	gb_acc_human_enhancers_ensembl	gb_acc_human_ensembl_regulatory	gb_acc_human_nontata_promoters	gb_acc_human_ocr_ensembl	gb_acc_demo_coding_vs_intergenomic_seqs	gb_acc_demo_human_or_worm	gb_acc_dummy_mouse_enhancers_ensembl
+1	4096	2026-04-21T10:32:30.015147	136.6	136.6	26229	28800.4	29049.1	1.155514	0.094123	7802	full_hg38	0.660000	0.677711	0.491491	nan	0.573000	0.810000	0.792000	0.691667
