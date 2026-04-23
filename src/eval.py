@@ -77,12 +77,14 @@ def extract_embs(backbone_or_model, input_ids, device, batch_size=8):
 @torch.enable_grad()
 def train_probe(X_train, y_train, device, hidden_dim=512):
     """Train linear probe on embeddings."""
+    # Cast embeddings to float32 for the probe
+    X_train = X_train.float()
     n_classes = y_train.max().item() + 1
     model = nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
         nn.ReLU(),
         nn.Linear(hidden_dim, n_classes),
-    ).to(device)
+    ).float().to(device)
 
     opt = torch.optim.AdamW(model.parameters(), lr=3e-4)
     criterion = nn.CrossEntropyLoss()
@@ -103,6 +105,7 @@ def train_probe(X_train, y_train, device, hidden_dim=512):
 def eval_probe(probe, X_test, y_test, device):
     """Evaluate probe accuracy."""
     probe.eval()
+    X_test = X_test.float()
     with torch.no_grad():
         correct = 0
         batch_size = 256

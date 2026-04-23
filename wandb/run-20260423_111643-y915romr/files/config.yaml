@@ -1,0 +1,80 @@
+_wandb:
+    value:
+        cli_version: 0.26.0
+        e:
+            k9rpu5idkaplwfmq3vd5sle50m3ah4wj:
+                codePath: test_smoke.py
+                codePathLocal: test_smoke.py
+                cpu_count: 32
+                cpu_count_logical: 64
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "982240026624"
+                        used: "262529630208"
+                email: ke.ding@anu.edu.au
+                executable: /home/stark/AutoResearch_Diffusion_Model/.venv/bin/python3
+                git:
+                    commit: ae0cc2a462059c2cdf08a314a1f74c808b8f7421
+                    remote: https://github.com/FreakingPotato/AutoReasrch_Diffusion_Model.git
+                gpu: NVIDIA GeForce RTX 3090
+                gpu_count: 2
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-f1bfed09-5072-abe1-011c-16830005dfc3
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-e7f27f6c-87db-c732-9e28-ef504318f456
+                host: coconut
+                memory:
+                    total: "84274057216"
+                os: Linux-6.17.0-19-generic-x86_64-with-glibc2.39
+                program: /home/stark/AutoResearch_Diffusion_Model/test_smoke.py
+                python: CPython 3.12.3
+                root: /home/stark/AutoResearch_Diffusion_Model
+                startedAt: "2026-04-23T01:16:43.743917Z"
+                writerId: k9rpu5idkaplwfmq3vd5sle50m3ah4wj
+        m: []
+        python_version: 3.12.3
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "3":
+                - 2
+                - 13
+                - 16
+                - 61
+            "4": 3.12.3
+            "5": 0.26.0
+            "6": 5.5.4
+            "12": 0.26.0
+            "13": linux-x86_64
+batch_size:
+    value: 2
+data_fraction:
+    value: 1%
+lr:
+    value: 0.0003
+max_steps:
+    value: 50
+model:
+    value: NucEL+Mamba2
+seq_len:
+    value: 4096

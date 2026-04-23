@@ -190,7 +190,8 @@ class NucELDiffusion(nn.Module):
         """Extract embeddings for downstream tasks."""
         out = self.backbone(input_ids=input_ids)
         hidden = out.last_hidden_state if hasattr(out, "last_hidden_state") else out[0]
-        return hidden[:, 0] if pool == "cls" else hidden.mean(dim=1)
+        emb = hidden[:, 0] if pool == "cls" else hidden.mean(dim=1)
+        return emb.float()  # Return float32 for downstream tasks
 
     def count_params(self):
         total = sum(p.numel() for p in self.parameters())

@@ -1,0 +1,45 @@
+=== Building model ===
+Loading NucEL (FreakingPotato/NucEL) flash_attention_2 ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1589.70it/s]
+  Backbone layers: 22
+  Layer 0: replaced attn_norm with mamba2
+  Layer 1: replaced attn_norm with mamba2
+  Layer 2: replaced attn_norm with mamba2
+  Layer 3: replaced attn_norm with mamba2
+  Layer 4: replaced attn_norm with mamba2
+  Layer 5: replaced attn_norm with mamba2
+  Layer 6: replaced attn_norm with mamba2
+  Layer 7: replaced attn_norm with mamba2
+  Layer 8: replaced attn_norm with mamba2
+  Layer 9: replaced attn_norm with mamba2
+  Layer 10: replaced attn_norm with mamba2
+  Layer 11: replaced attn_norm with mamba2
+  Layer 12: replaced attn_norm with mamba2
+  Layer 13: replaced attn_norm with mamba2
+  Layer 14: replaced attn_norm with mamba2
+  Layer 15: replaced attn_norm with mamba2
+  Layer 16: replaced attn_norm with mamba2
+  Layer 17: replaced attn_norm with mamba2
+  Layer 18: replaced attn_norm with mamba2
+  Layer 19: replaced attn_norm with mamba2
+  Layer 20: replaced attn_norm with mamba2
+  Layer 21: replaced attn_norm with mamba2
+Model: 136.6M total, 136.6M trainable
+Loading checkpoints_phase4_2/stage1_seq4096_best.pt...
+Loaded 49/379 params
+=== Loading 1% data ===
+  train: 753,972 sequences (seq_len=4096)
+Using 7539 samples (1% of 753972)
+
+=== Training (50 steps) ===
+  step 000/50 | loss=1.6042 | lr=0.000000 | elapsed=13.8s
+  step 010/50 | loss=1.3693 | lr=0.000292 | elapsed=16.5s
+  step 020/50 | loss=1.3734 | lr=0.000232 | elapsed=19.3s
+  step 030/50 | loss=1.3835 | lr=0.000142 | elapsed=22.0s
+  step 040/50 | loss=1.3311 | lr=0.000062 | elapsed=24.8s
+
+=== Quick GB Eval ===
+Loading NucEL vocab from FreakingPotato/NucEL ...
+  GB eval error: expected mat1 and mat2 to have the same dtype, but got: c10::BFloat16 != float
+Checkpoint saved: checkpoints_phase4_2/test_1pct_final.pt
