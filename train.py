@@ -57,7 +57,13 @@ def get_cosine_lr_with_min_lr(step, num_training_steps, warmup_steps, min_lr_rat
 
 
 def load_stage1_checkpoint(model, device, ckpt_path=STAGE1_CKPT):
-    """Load stage 1 checkpoint into stage 2 model."""
+    """Load stage 1 checkpoint into stage 2 model.
+
+    Handles key-name remapping: Stage 1 uses '_layers.X.*' while
+    Stage 2 (built fresh from NucEL) uses 'backbone.layers.X.*'.
+    Both sets of parameters have identical shapes, so we remap
+    '_layers.' -> 'backbone.layers.' before loading.
+    """
     if not ckpt_path.exists():
         print(f"Warning: Stage 1 checkpoint not found at {ckpt_path}")
         return
@@ -67,11 +73,22 @@ def load_stage1_checkpoint(model, device, ckpt_path=STAGE1_CKPT):
     state = ckpt["state_dict"]
     model_state = model.state_dict()
 
-    # Load matching parameters
-    loaded = {k: v for k, v in state.items() if k in model_state and v.shape == model_state[k].shape}
-    model_state.update(loaded)
+    # Remap keys: Stage 1 '_layers.X' -> Stage 2 'backbone.layers.X'
+    loaded = 0
+    skipped = 0
+    for k, v in state.items():
+        if k.startswith("_layers."):
+            k = "backbone." + k[1:]  # _layers -> backbone.layers
+        if k in model_state and v.shape == model_state[k].shape:
+            model_state[k] = v
+            loaded += 1
+        else:
+            skipped += 1
+
     model.load_state_dict(model_state)
-    print(f"Loaded {len(loaded)}/{len(state)} params from stage 1")
+    print(f"Loaded {loaded}/{len(state)} params from stage 1 ({skipped} skipped)")
+    if loaded < len(state):
+        print(f"  WARNING: {len(state) - loaded} params could not be loaded!")
 
 
 def main():
