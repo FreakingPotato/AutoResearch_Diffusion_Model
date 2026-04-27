@@ -92,15 +92,40 @@ pip install torch transformers mamba_ssm wandb deepspeed
 
 ## Phase 4.2 Results
 
-### Stage 1 (seq_len=4096, 8h)
-- Steps: 26,229
-- Val loss: 0.000014
-- GB avg (sampled): 0.657
+### GB Benchmark Evolution
 
-### Stage 2 (seq_len=8192, 4h, old mp.spawn method)
-- Steps: 16,415 (GPU 0), 2,745 (GPU 1)
-- Final val loss: 0.0744 (step 15000)
-- GB avg: 0.682
+![GB Evolution](gb_evolution.png)
+
+### Stage 1 (seq_len=4096, 8h)
+- **Steps**: 10,000+
+- **Val loss**: ~0.87
+- **GB avg (sampled)**: 0.626
+- **Key fix**: Stage 1→Stage 2 checkpoint loading remaps `_layers.*` → `backbone.layers.*`
+
+### Stage 2 (seq_len=8192, 4h, dual GPU)
+- **Steps**: 15,800 (interrupted for evaluation)
+- **Val loss**: 0.8764 (step 15000)
+- **GB avg (sampled)**: 0.678
+- **Checkpoint**: `checkpoints_phase4_2/stage2_seq8192_step15000.pt`
+- **Improvement vs Stage 1**: +0.052
+
+### Comparison with NucEL Paper
+
+| Dataset | Stage 1 | Stage 2 | NucEL | Δ (S2) |
+|---------|---------|---------|-------|--------|
+| demo_coding_vs_intergenomic_seqs | 0.704 | 0.804 | 0.952 | -0.148 |
+| demo_human_or_worm | 0.760 | 0.796 | 0.922 | -0.126 |
+| dummy_mouse_enhancers_ensembl | 0.570 | 0.603 | 0.791 | -0.188 |
+| human_enhancers_cohn | 0.664 | 0.668 | 0.709 | -0.041 |
+| human_enhancers_ensembl | 0.568 | 0.632 | 0.732 | -0.100 |
+| human_ensembl_regulatory | 0.572 | 0.672 | 0.583 | **+0.089** ✅ |
+| human_ocr_ensembl | 0.544 | 0.568 | 0.676 | -0.108 |
+| **Average** | **0.626** | **0.678** | **0.781** | **-0.103** |
+
+**Notes:**
+- Evaluation uses 512-sequence length with 20% sampling, linear probe (10 epochs)
+- `human_ensembl_regulatory` exceeds NucEL baseline by 8.9%
+- Demo datasets show largest gap—may need more training steps or different evaluation strategy
 
 ## Phase 4.1 Results (for comparison)
 
