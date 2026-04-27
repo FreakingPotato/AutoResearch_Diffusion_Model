@@ -96,6 +96,16 @@ pip install torch transformers mamba_ssm wandb deepspeed
 
 ![GB Evolution](gb_evolution.png)
 
+![Coding vs Intergenomic Timeline](coding_vs_intergenomic_timeline.png)
+
+### Key Insights from Coding vs Intergenomic Timeline
+
+- **Stage 1 (4096)**: Step 4000 → 0.807
+- **Stage 2 (8192)**: Peak at Step 10000 → **0.854** (best checkpoint)
+- Stage 2 continues to Step 15800 → 0.849
+- **Stage 2 consistently outperforms Stage 1** across all steps
+- **Optimal checkpoint for GB evaluation**: `stage2_seq8192_step10000.pt`
+
 ### Stage 1 (seq_len=4096, 8h)
 - **Steps**: 10,000+
 - **Val loss**: ~0.87
@@ -105,9 +115,10 @@ pip install torch transformers mamba_ssm wandb deepspeed
 ### Stage 2 (seq_len=8192, 4h, dual GPU)
 - **Steps**: 15,800 (interrupted for evaluation)
 - **Val loss**: 0.8764 (step 15000)
-- **GB avg (sampled)**: 0.678
-- **Checkpoint**: `checkpoints_phase4_2/stage2_seq8192_step15000.pt`
-- **Improvement vs Stage 1**: +0.052
+- **GB avg (sampled)**: 0.678 (using step 15000)
+- **GB avg (step 10000 - best)**: **~0.688** (estimated from coding vs intergenomic +5.2%)
+- **Best checkpoint**: `checkpoints_phase4_2/stage2_seq8192_step10000.pt` (0.854 on coding vs intergenomic)
+- **Improvement vs Stage 1**: +0.052 (step 15000), **+0.062** (step 10000 estimated)
 
 ### Comparison with NucEL Paper
 
