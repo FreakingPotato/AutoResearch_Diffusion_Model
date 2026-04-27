@@ -122,21 +122,24 @@ pip install torch transformers mamba_ssm wandb deepspeed
 
 ### Comparison with NucEL Paper
 
-| Dataset | Stage 1 | Stage 2 | NucEL | Δ (S2) |
-|---------|---------|---------|-------|--------|
-| demo_coding_vs_intergenomic_seqs | 0.704 | 0.804 | 0.952 | -0.148 |
-| demo_human_or_worm | 0.760 | 0.796 | 0.922 | -0.126 |
-| dummy_mouse_enhancers_ensembl | 0.570 | 0.603 | 0.791 | -0.188 |
-| human_enhancers_cohn | 0.664 | 0.668 | 0.709 | -0.041 |
-| human_enhancers_ensembl | 0.568 | 0.632 | 0.732 | -0.100 |
-| human_ensembl_regulatory | 0.572 | 0.672 | 0.583 | **+0.089** ✅ |
-| human_ocr_ensembl | 0.544 | 0.568 | 0.676 | -0.108 |
-| **Average** | **0.626** | **0.678** | **0.781** | **-0.103** |
+LP = Linear Probe (freeze backbone, train MLP) | FT = Full Fine-tuning (all parameters)
 
-**Notes:**
-- Evaluation uses 512-sequence length with 20% sampling, linear probe (10 epochs)
-- `human_ensembl_regulatory` exceeds NucEL baseline by 8.9%
-- Demo datasets show largest gap—may need more training steps or different evaluation strategy
+| Dataset | Stage 1 LP | Stage 2 LP | Stage 2 FT | NucEL | FT Δ |
+|---------|-----------|-----------|-----------|-------|------|
+| demo_coding_vs_intergenomic_seqs | 0.704 | 0.804 | 0.883 | 0.952 | -0.068 |
+| demo_human_or_worm | 0.760 | 0.796 | **0.908** | 0.922 | -0.013 |
+| dummy_mouse_enhancers_ensembl | 0.570 | 0.603 | 0.624 | 0.791 | -0.167 |
+| human_enhancers_cohn | 0.664 | 0.668 | **0.727** | 0.709 | **+0.018** ✅ |
+| human_enhancers_ensembl | 0.568 | 0.632 | 0.615 | 0.732 | -0.117 |
+| human_ensembl_regulatory | 0.572 | 0.672 | 0.573 | 0.583 | -0.010 |
+| human_ocr_ensembl | 0.544 | 0.568 | 0.565 | 0.676 | -0.111 |
+| **Average** | **0.626** | **0.678** | **0.699** | **0.781** | **-0.082** |
+
+**Key findings:**
+- Full fine-tuning improves over linear probe by **+2.1%** on average (0.699 vs 0.678)
+- `human_enhancers_cohn` exceeds NucEL baseline by **+1.8%** with fine-tuning ✅
+- `demo_human_or_worm` reaches **0.908**, only **1.3%** below NucEL
+- Fine-tuning takes ~7 min per dataset on single RTX 3090
 
 ## Phase 4.1 Results (for comparison)
 
